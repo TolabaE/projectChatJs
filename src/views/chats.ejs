@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <title>WhatsChats</title>
+</head>
+
+<body>
+    <div class="container-father">
+        <div class="container-chats">
+            <div class="header-chat">
+                <div>
+                    <img src="https://img.icons8.com/ios-filled/50/null/name.png"/>
+                </div>
+                <div>
+                    <p class="text-user" id="name-user"></p>
+                </div>
+                <div>
+                    <img src="https://img.icons8.com/ios-filled/45/null/delete--v1.png"/>
+                </div>
+            </div>
+            <div class="container-p" id="text_parrafo">
+                <!-- aqui se inyectan los mensajes -->
+            </div>
+            <form  id="form" class="chats-children">
+                <input type="text" name="name_text" placeholder="Escribir Mensaje" class="text-input" id="input-text">
+                <button><img src="https://img.icons8.com/carbon-copy/30/null/file.png"/></button>
+                <button type="submit"><img src="https://img.icons8.com/plumpy/30/000000/filled-sent.png"/></button>     
+            </form>
+            <!-- <div class="chats-children">
+            </div> -->
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- connectamos el socket del lado de la vista -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- conectamos con la carpeta del cliente que esta en public -->
+    <script src="/js/chats.js"></script>
+</body>
+
+</html>
