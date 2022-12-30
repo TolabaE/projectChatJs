@@ -3,8 +3,14 @@
     margin: 0;
 }
 body{
-    background-color: #bee9e8;
+    background-color: #92e6a7;
     font-family: 'Poppins', sans-serif;
+}
+:root{
+    --one-palet-color:#1a7431;
+    --two-palet-color:#b7efc5;
+    --three-palet-color: #6ede8a;
+    --four-palet-color:#2dc653;
 }
 .container-father{
     display: flex;
@@ -15,7 +21,7 @@ body{
 .container-chats{
     display: flex;
     flex-direction: column;
-    background-color: #001233;
+    background-color: var(--one-palet-color);
     height:90vh;
     width: 350px;
     padding: 10px;
@@ -25,16 +31,16 @@ body{
     width: 100%;
     height: 33px;
 }
-.container-p{
+.container-messages{
     height: 80vh;
     width: 100%;
-    background-color: rgb(122, 164, 241);
+    background-color: var(--two-palet-color);
     overflow-y: scroll;
 }
 .text{
     display: flex;
     justify-content: space-between;
-    background-color: #caf0f8;
+    background-color:var(--three-palet-color);
     border-radius:0px 10px 10px 25px;
     padding-left: 10px;
     padding: 6px;
@@ -52,7 +58,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color:#0353a4;
+    background-color:var(--four-palet-color);
     padding: 5px;
     width: 1fr;
     height: 60px;
@@ -64,9 +70,8 @@ body{
 }
 
 @media (max-width:768px){
-
     .container-chats{
-        background-color: #001233;
+        background-color:var(--one-palet-color);
         height: 100vh;
         width: 90vw;
         margin: 5px;
@@ -76,10 +81,8 @@ body{
         width: 100%;
         height: 33px;
     }
-    .container-p{
+    .container-messages{
         height: 100%;
         width: 100%;
-        background-color: rgb(30, 97, 221);
     }
-
 }
