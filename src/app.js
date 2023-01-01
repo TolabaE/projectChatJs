@@ -4,7 +4,8 @@ import { Server } from "socket.io";
 import chatsModels from "./model/chatsmodel.js";
 
 const app = Express();
-const server = app.listen(8080,console.log("listening on express :)"));
+const PORT = process.env.PORT || 8080 ;
+const server = app.listen(PORT,console.log("listening on express :)"));
 
 //seteamos donde queremos que se muestre nuestra vista, y le pasamos la ruta donde se encuentra la carpeta. 
 app.set('views',__dirname+'/views');
@@ -22,6 +23,11 @@ const io = new Server(server);
 io.on('connection',async(socket)=>{
     console.log("socket connected");
 
+    //recibo el nombre del usuario que se conecta y lo envio a todos los conectados menos a mi.
+    socket.on('register',(user) =>{
+        socket.broadcast.emit('newUser',user);
+    })
+
     //nos envia el chats que habia hasta el momento de conectarnos.
     const messages = await chatsModels.find();//me trae todo los mensajes de la base de datos.
     socket.emit('arraymessages',messages);
@@ -31,10 +37,5 @@ io.on('connection',async(socket)=>{
         await chatsModels.create(data);//guardo los datos en la base de datos.
         const messages = await chatsModels.find();
         io.emit('arraymessages', messages);
-    })
-    
-    //recibo el nombre del usuario que se conecta y lo envio a todos los conectados menos a mi.
-    socket.on('registeredUser',user=>{
-        socket.broadcast.emit('newUser',user);
     })
 })

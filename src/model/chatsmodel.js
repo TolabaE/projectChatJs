@@ -1,8 +1,13 @@
 import mongoose from "mongoose";
+import config from "../config/config.js";
 
-mongoose.connect('mongodb+srv://coderUser:123454321@codercluster0.nvobhct.mongodb.net/proyectChat?retryWrites=true&w=majority',(error)=>{
+const database = config.mongo.DB;
+const password = config.mongo.PWD;
+const user = config.mongo.USER;
+
+mongoose.connect(`mongodb+srv://${user}:${password}@codercluster0.nvobhct.mongodb.net/${database}?retryWrites=true&w=majority`,(error)=>{
     if (error) {
-        throw (error);//el throw te permite que si encuentra algun error, se detiene la ejecucion del programa y no sigue con la siguiente linea.
+        throw new Error(error);//el throw te permite que si encuentra algun error, se detiene la ejecucion del programa y no sigue con la siguiente linea.
     }
     console.log('connected mongoose');
 })
@@ -11,7 +16,7 @@ mongoose.connect('mongodb+srv://coderUser:123454321@codercluster0.nvobhct.mongod
 const collection = 'chats';
 
 const schema = mongoose.Schema({
-    user:{
+    first_name:{
         type:String,
         required:true
     },
@@ -19,7 +24,7 @@ const schema = mongoose.Schema({
         type:String,
         required:true
     },
-    data:{
+    date:{
         type:String,
         required:true
     }
