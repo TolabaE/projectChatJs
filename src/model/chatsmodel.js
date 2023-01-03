@@ -13,7 +13,7 @@ mongoose.connect(`mongodb+srv://${user}:${password}@codercluster0.nvobhct.mongod
 })
 
 
-const collection = 'chats';
+const collection = 'messages';
 
 const schema = mongoose.Schema({
     first_name:{
@@ -25,6 +25,10 @@ const schema = mongoose.Schema({
         required:true
     },
     date:{
+        type:String,
+        required:true
+    },
+    color_name:{
         type:String,
         required:true
     }

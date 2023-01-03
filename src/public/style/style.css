@@ -3,14 +3,14 @@
     margin: 0;
 }
 body{
-    background-color: #92e6a7;
+    background-color: #88d4ab;
     font-family: 'Poppins', sans-serif;
 }
 :root{
-    --one-palet-color:#1a7431;
-    --two-palet-color:#b7efc5;
-    --three-palet-color: #6ede8a;
-    --four-palet-color:#2dc653;
+    --one-palet-color:#036666;
+    --two-palet-color:white;
+    --three-palet-color: #99e2b4;
+    --four-palet-color:#469d89;
 }
 .container-father{
     display: flex;
@@ -34,19 +34,36 @@ body{
 .container-messages{
     height: 80vh;
     width: 100%;
-    background-color: var(--two-palet-color);
+    background-color:var(--three-palet-color);
     overflow-y: scroll;
 }
-.text{
+.text-you{
     display: flex;
-    justify-content: space-between;
-    background-color:var(--three-palet-color);
-    border-radius:0px 10px 10px 25px;
+    flex-direction: column;
+    background-color:var(--two-palet-color);
+    border-radius:0px 20px 20px 20px;
     padding-left: 10px;
     padding: 6px;
     margin: 6px; 
 }
-.text span{
+.text-you div {
+    display: flex;
+    justify-content: space-between;
+}
+.text-you span{
+    color: black;
+    font-size: small;
+}
+.text-me{
+    display: flex;
+    justify-content: space-between;
+    background-color:var(--four-palet-color);
+    border-radius:20px 0px 35px 20px;
+    padding-left: 10px;
+    padding: 6px;
+    margin: 4px; 
+}
+.text-me span{
     color: black;
     font-size: small;
 }
@@ -58,7 +75,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color:var(--four-palet-color);
+    background-color:#248277;
     padding: 5px;
     width: 1fr;
     height: 60px;
@@ -71,7 +88,6 @@ body{
 
 @media (max-width:768px){
     .container-chats{
-        background-color:var(--one-palet-color);
         height: 100vh;
         width: 90vw;
         margin: 5px;

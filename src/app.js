@@ -31,7 +31,7 @@ io.on('connection',async(socket)=>{
     //nos envia el chats que habia hasta el momento de conectarnos.
     const messages = await chatsModels.find();//me trae todo los mensajes de la base de datos.
     socket.emit('arraymessages',messages);
-
+    socket.emit('array',messages)//envio los mensajes,para poder trabaja con condicionales.
     //recibo el usuario y el mensaje que me envian del lado del cliente.
     socket.on('message',async(data)=>{
         await chatsModels.create(data);//guardo los datos en la base de datos.
