@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
 
-//aqui inizializo todas las variables de entorno que valla a utilizar en mi proyecto.
+//aqui inizializo dotenv para poder llamar a mis variables de entorno.
 dotenv.config()
 
-//exporto mis variables de entorno que estan en el archivo.
+//exporto mis variables de entorno para usarlo en sus respectivos archivos.
 export default {
     mongo:{
         USER:process.env.mongo_user,

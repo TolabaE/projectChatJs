@@ -1,3 +1,5 @@
+"use strict";
+
 const socket = io({autoConnect:false});
 const inputMessages = document.getElementById('input-text');
 const insertText = document.getElementById('text_parrafo');
@@ -6,14 +8,22 @@ const insertUser = document.getElementById('name-user');
 
 let user //creo una variable para poder guardar el usuario
 let color //creo una variable para poder guardar el color.
-const fecha = new Date().toLocaleTimeString();//creo un variable que guarde la hora,los minutos y segundos.
+let array //creo una variable para poder guardar los mensjaes que habia antes en la base mongo.
+
+const hora = new Date().toLocaleTimeString();//creo un variable que guarde la hora,los minutos y segundos.
+const fecha = new Date().toLocaleDateString();//me trae unicamente la fecha ej: dia/mes/año.
 
 //genera un color random.
 const colorRandom = () =>{
-    let R = Math.floor(Math.random()*255);
-    let G = Math.floor(Math.random()*255);
-    let B = Math.floor(Math.random()*255);
-    return `rgb(${R},${G},${B})`;
+    let R = Math.floor(Math.random()*256);
+    let G = Math.floor(Math.random()*256);
+    let B = Math.floor(Math.random()*256);
+    //si la suma de los colores supera el umbral vuelve a ejecutarse la funcion.esto para no obtener colores muy claros
+    if (R+G+B >= 750) {
+        return colorRandom();
+    }else{
+        return `rgb(${R},${G},${B})`;
+    }
 }
 
 Swal.fire({
@@ -35,7 +45,6 @@ Swal.fire({
     insertUser.innerHTML = user;
 })
 
-let array 
 //recibo los mensajes que habia hasta el momento de enviar un nuevo texto.
 socket.on('array',msm=>{
     array = msm;//igualo el arreglo de mensaje a mi nuevo variable creada.
@@ -49,10 +58,10 @@ formMessages.addEventListener('submit',(e)=>{
         //me fijo si el usuario ingresado ya existia en la base de datos
         if (array.some(usuario=>usuario.first_name === user)) {
             const existed = array.find(msm =>msm.first_name === user);//obtengo el color que le fue asignado previamente al usuario.
-            socket.emit('message',{first_name:user,text:value,date:fecha,color_name:existed.color_name});
+            socket.emit('message',{first_name:user, text:value, time:hora, date:fecha, color_name:existed.color_name});
         } else {
             //si el usuario ingresa por primera vez,le asigno un color random al azar
-            socket.emit('message',{first_name:user,text:value,date:fecha,color_name:color});
+            socket.emit('message',{first_name:user, text:value, time:hora, date:fecha, color_name:color});
         }
         formMessages[0].value = " ";
     }
@@ -67,10 +76,10 @@ inputMessages.addEventListener('keyup',(event)=>{
             //me fijo si el usuario ingresado ya existia en la base de datos
             if (array.some(usuario=>usuario.first_name === user)) {
                 const existed = array.find(msm =>msm.first_name === user);//obtengo el color que le fue asignado previamente al usuario.
-                socket.emit('message',{first_name:user,text:value,date:fecha,color_name:existed.color_name});
+                socket.emit('message',{first_name:user, text:value, time:hora, date:fecha, color_name:existed.color_name});
             } else {
                 //si el usuario ingresado no existia,le asigno un color random.
-                socket.emit('message',{first_name:user,text:value,date:fecha,color_name:color});
+                socket.emit('message',{first_name:user, text:value, time:hora, date:fecha, color_name:color});
             }
             inputMessages.value = " ";
         }
@@ -83,13 +92,13 @@ socket.on('arraymessages',data=>{
     //si el usuario que ingresa es el mismo que envia el texto,entonces mostrame los mensajes del lado izquierdo. 
     data.forEach(msg => {
         if (msg.first_name === user) {
-            text +=`<p class="text-me">${msg.text} <span>${msg.date}</span></p>`;
+            text +=`<p class="text-me">${msg.text} <span>${msg.time}</span></p>`;
         }else{
             text +=`
             <div class="text-you">
                 <h4 style=color:${msg.color_name}>${msg.first_name}</h4>
                 <div>
-                    <p>${msg.text}</p><span>${msg.date}</span>
+                    <p>${msg.text}</p><span>${msg.time}</span>
                 </div>
             </div>`
         }
@@ -116,37 +125,3 @@ socket.on('newUser',usuario=>{
         title: `${usuario} esta en linea`
     })
 })
-
-// Swal.fire({
-//     title: 'Registrate',
-//     html:
-//         '<input id="swal-input1" class="swal2-input" placeholder="Nombre">' +
-//         '<input id="swal-input2" class="swal2-input" placeholder="Apellido">',
-//     htmlValidator:(value)=>{
-//         return !value && '¡necesitas ingresar con un nombre!'
-//     },
-//     //te permite bloquear el click a fuera del alerta,asi no se cierra la ventanas.
-//     allowOutsideClick:false,
-//     allowEscapeKey:false,//no te permite salir cuando hagas click en la tecla esc.
-//     focusConfirm: false,
-//     preConfirm: () => {
-//         return {
-//             first_name:document.getElementById('swal-input1').value,
-//             last_name:document.getElementById('swal-input2').value
-//         }
-//     }
-// })
-// .then(result=>{//capturo el nombre de usuario que me envian por el sweetalert.
-//     if (!result.value) {
-//         Swal.fire(
-//             'The Internet?',
-//             'That thing is still around?',
-//             'question'
-//         )
-//     }else{
-//         user = result.value;
-//         socket.connect();
-//         socket.emit('register',user.first_name);//envio los datos del cliente al servidor.
-//         insertUser.innerHTML = user.first_name;
-//     }
-// })
