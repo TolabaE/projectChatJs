@@ -6,7 +6,7 @@ dotenv.config()
 //exporto mis variables de entorno para usarlo en sus respectivos archivos.
 export default {
     mongo:{
-        USER:process.env.mongo_user,
+        DOC:process.env.mongo_collection,
         DB:process.env.mongo_db,
         PWD:process.env.mongo_password,
     }

@@ -9,7 +9,8 @@ para ejecutar el servidor y su almacenamiento de datos esta alojado en una base 
 
 ## Ejecutando las pruebas ⚙️
 Probalo con un amigo, verifica de estar conectado con alguien mas,porque no veras la interación de los mensajes, al escribir y enviar un mensaje el servidor automaticamente te asigna un color random al azar, y no podras visualizarlo tu mismo, sino otras personas podran ver el color de tu nombre en el chats, es como tu identificador personal.
-Tus mensajes apareceran del lado derecho de la pantalla y el resto del lado izquierdo, ademas veras la hora en la que fue enviado.
+Tus mensajes apareceran del lado derecho de la pantalla y el resto del lado izquierdo, ademas veras la hora en la que fue enviado, Si intentas enviar un
+mensaje o cadena vacia, te mostrara una alerta y la peticion no sera enviada.
 
 ### Advertencia 📢
 * Los mensajes guardados son de caracter publico y cualquier cliente que se conecte, tendra acceso a las conversaciones que anteriormente 
@@ -18,8 +19,7 @@ fueron enviados.
 * Evitar el uso de malas palabras.
 
 ## Previsualización del sitio.
-Podes visitar el deploy de la aplicacion web, haciendo [click]() aquí.
-Al momento de usarlo, verifica estar conectado con un amigo.
+Podes visitar el deploy de la aplicacion web, haciendo [click](https://proyectchatjs-production.up.railway.app/) aquí.
 
 ## Construido con 🛠️
 Utiliza diferentes librerias y modulos que son instalados de un gestor de paquetes [NPM](https://www.npmjs.com/).

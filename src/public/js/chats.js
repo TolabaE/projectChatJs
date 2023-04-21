@@ -63,16 +63,24 @@ formMessages.addEventListener('submit',(e)=>{
             //si el usuario ingresa por primera vez,le asigno un color random al azar
             socket.emit('message',{first_name:user, text:value, time:hora, date:fecha, color_name:color});
         }
-        formMessages[0].value = " ";
+        formMessages[0].value = "";
+    }else {
+        Toastify({
+            text: "No hay mensaje para enviar!!",
+            duration: 3000,
+            style: {
+                background: "linear-gradient(90deg, rgba(78,76,199,1) 100%, rgba(252,176,69,1) 100%)",
+            },
+        }).showToast();
     }
 })
 
 //este codigo te permite enviar los mensajes cuando presionas la tecla enter.
 inputMessages.addEventListener('keyup',(event)=>{
-    if (event.key ==="Enter") {
-        const value = inputMessages.value.trim();
+    const value = inputMessages.value.trim();
+    if (event.key === "Enter") {
         //creo un condicion de si la longuitud del mensaje es mayor a 0, ejecutame esto.
-        if (value.length > 0) {
+        if (value.length !== 0) {
             //me fijo si el usuario ingresado ya existia en la base de datos
             if (array.some(usuario=>usuario.first_name === user)) {
                 const existed = array.find(msm =>msm.first_name === user);//obtengo el color que le fue asignado previamente al usuario.
@@ -81,10 +89,10 @@ inputMessages.addEventListener('keyup',(event)=>{
                 //si el usuario ingresado no existia,le asigno un color random.
                 socket.emit('message',{first_name:user, text:value, time:hora, date:fecha, color_name:color});
             }
-            inputMessages.value = " ";
+            inputMessages.value = "";
         }
     }
-})
+});
 
 //recibo los datos que me envian del servidor y los inserto en el HTML.
 socket.on('arraymessages',data=>{

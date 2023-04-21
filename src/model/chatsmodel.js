@@ -3,9 +3,9 @@ import config from "../config/config.js";
 
 const database = config.mongo.DB;
 const password = config.mongo.PWD;
-const user = config.mongo.USER;
 
-mongoose.connect(`mongodb+srv://${user}:${password}@codercluster0.nvobhct.mongodb.net/${database}?retryWrites=true&w=majority`,(error)=>{
+mongoose.set('strictQuery', false);
+mongoose.connect(`mongodb+srv://coderUser:${password}@codercluster0.nvobhct.mongodb.net/${database}?retryWrites=true&w=majority`,(error)=>{
     if (error) {
         throw new Error(error);//el throw te permite que si encuentra algun error, se detiene la ejecucion del programa y no sigue con la siguiente linea.
     }
@@ -13,7 +13,7 @@ mongoose.connect(`mongodb+srv://${user}:${password}@codercluster0.nvobhct.mongod
 })
 
 
-const collection = 'messages';
+const collection = `${config.mongo.DOC}`;
 
 const schema = mongoose.Schema({
     first_name:{
