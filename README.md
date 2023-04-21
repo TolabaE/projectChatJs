@@ -1,4 +1,4 @@
-# Comunicación por chats.
+# Proyecto ChatsJs.
 Este es un proyecto personal que lo realize durante mi cursada de back-end, donde creo un canal de comunicación por mensajes entre dos o mas personas.
 El cliente puede registrase con un nombre y despues podra escribir en el chats, la conexion del emisor y receptor es en tiempo real,ademas tendras una alerta por cada nuevo usuario que valla accediendo.
 La aplicación es full responsive y se adapta tanto en desktop, como dispositivos moviles.
@@ -26,14 +26,13 @@ Utiliza diferentes librerias y modulos que son instalados de un gestor de paquet
 
 * CSS.
 * JavaScript.
-* [express](https://expressjs.com/es/).
+* [Express js](https://expressjs.com/es/).
 * Ejs (Motor de plantilla).
 * [Sweetalert2](https://sweetalert2.github.io/).
 * [Toastify](https://www.npmjs.com/package/toastify-js).
 * [Node.js](https://nodejs.org/es/) -version 16.15.1.
 * [socket.io](https://socket.io).
 * [mongoose](https://mongoosejs.com/).
-* MongoDB (base de datos).
 
 ## Autores ✒️
 * Eduardo Tolaba (Podes seguirme en [Linkedln](www.linkedin.com/in/tolaba-eduardo-esequiel))
